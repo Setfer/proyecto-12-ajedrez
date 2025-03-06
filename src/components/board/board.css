@@ -1,0 +1,14 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 5px;
+}
+
+.black{
+  background-color: rgba(0, 0, 0, 0.541);
+}
+
+.ficha{
+  height: 20px;
+}
