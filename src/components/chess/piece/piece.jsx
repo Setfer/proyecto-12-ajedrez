@@ -3,29 +3,23 @@ import React, { useRef } from 'react'
 const Piece = ({casilla, fichas, dispatch}) => {
 
 
-  
-
-
-  const moverFicha = (id) => {
-    const ficha = fichas.find((ficha) => ficha.id === id)
+  const selecFicha= (id)=>{
+    const ficha = fichas.find((ficha)=> ficha.id ===id)
     if (!ficha) return
-    const newRow = ficha.row +ficha.nextRow
-    if (newRow < 8) {
-      dispatch({
-        type: 'MOVE_FICHA',
-        payload: {
-          id,
-          newRow,
-          newCol: ficha.col
-        }
-      })
-    }
+    dispatch({
+      type:"SELECT_FICHA",
+      payload:{
+        id
+      }
+    })
   }
+
 
   return (
     <div>
       <img
-        onClick={() => moverFicha(casilla.ficha.id)}
+    
+        onClick={() => selecFicha(casilla.ficha.id)}
         className='ficha'
         src={casilla.ficha.img}
       />

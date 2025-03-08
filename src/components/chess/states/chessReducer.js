@@ -6,7 +6,8 @@ export const initialStateChess = [
     row: 0,
     col: 0,
     nextRow: 2,
-    nextCol: 0
+    nextCol: 0,
+    active: false
   },
   {
     id: 1,
@@ -15,7 +16,8 @@ export const initialStateChess = [
     row: 0,
     col: 1,
     nextRow: 1,
-    nextCol: 0
+    nextCol: 0,
+    active: false
   }
 ]
 
@@ -27,12 +29,16 @@ export const reducer = (state, action) => {
           ? {
               ...ficha,
               row: action.payload.newRow,
-              col: action.payload.newCol
+              col: action.payload.newCol,
+              active: action.payload.active
             }
           : ficha
+      )
+    case 'SELECT_FICHA':
+      return state.map((ficha) =>
+        ficha.id === action.payload.id ? { ...ficha, active: true } : { ...ficha, active: false }
       )
     default:
       return state
   }
 }
-
