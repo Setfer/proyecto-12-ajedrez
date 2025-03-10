@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-const Piece = ({casilla, fichas, dispatch}) => {
+const Piece = ({casilla, fichas, dispatch, setBoard}) => {
 
 
   const selecFicha= (id)=>{
@@ -12,6 +12,20 @@ const Piece = ({casilla, fichas, dispatch}) => {
         id
       }
     })
+    updateCasilla ((ficha.row + ficha.nextRow), ficha.col, {isValid: true})
+  }
+
+
+  const updateCasilla = (row, col, newValues) => {
+    setBoard((prevBoard) =>
+      prevBoard.map((fila, r) =>
+        fila.map((casilla, c) =>
+          r === row && c === col
+            ? { ...casilla, ...newValues } // Solo modificamos la casilla específica
+            : casilla
+        )      
+      )    
+    )
   }
 
 

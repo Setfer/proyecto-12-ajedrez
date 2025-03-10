@@ -12,3 +12,7 @@
 .ficha{
   height: 20px;
 }
+
+.active{
+  background-color: red;
+}
