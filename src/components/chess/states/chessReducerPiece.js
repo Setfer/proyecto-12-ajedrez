@@ -30,7 +30,7 @@ export const reducer = (state, action) => {
               ...ficha,
               row: action.payload.newRow,
               col: action.payload.newCol,
-              active: action.payload.active
+              active: false
             }
           : ficha
       )

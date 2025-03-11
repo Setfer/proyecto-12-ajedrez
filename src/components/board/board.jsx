@@ -3,39 +3,10 @@ import './board.css'
 import { initialStateChess, reducer } from '../chess/states/chessReducerPiece'
 import Piece from '../chess/piece/piece'
 import { colocarFichas } from './colocarFichas'
-
-
-
-const initialStateBoard = Array.from({length :8 }, (_, row)=>Array.from({length:8}, (_,col)=>({
-  color: (row + col) % 2 === 0 ? 'white' : 'black',
-  tieneFicha: false,
-  ficha: null,
-  row: row,
-  col: col,
-  isValid: false
-})))
-
+import { initialStateBoard, reducerBoard } from './reducerBoard'
 
 const Board = () => {
-
-  const [board, setBoard] = useState(
-    Array.from({ length: 8 }, (_, row) =>
-      Array.from({ length: 8 }, (_, col) => ({
-        color: (row + col) % 2 === 0 ? 'white' : 'black',
-        tieneFicha: false,
-        ficha: null,
-        row: row,
-        col: col,
-        isValid: false
-      }))
-    )
-
-  )
-
- 
-
-
-
+  const [board, dispatchBoard] = useReducer(reducerBoard, initialStateBoard)
   const [fichas, dispatch] = useReducer(reducer, initialStateChess)
 
   const moverFicha = (colBoard, rowBoard) => {
@@ -50,17 +21,14 @@ const Board = () => {
         payload: {
           id: ficha.id,
           newRow: newRow,
-          newCol: newCol,
-          active: false
+          newCol: newCol
         }
       })
     }
   }
 
   useEffect(() => {
-    colocarFichas(fichas, setBoard)
-    console.log(board)
-    
+    colocarFichas(fichas, dispatchBoard)
   }, [fichas])
 
   return (
@@ -70,12 +38,19 @@ const Board = () => {
           onClick={() => {
             moverFicha(casilla.col, casilla.row)
           }}
-          className={`${casilla.color} ${casilla.isValid ===true ? "active":""}`}
+          className={`${casilla.color} ${
+            casilla.isValid === true ? 'active' : ''
+          }`}
           key={index}
         >
           <p>{casilla.color}</p>
           {casilla.ficha ? (
-            <Piece casilla={casilla} fichas={fichas} dispatch={dispatch} setBoard={setBoard}/>
+            <Piece
+              casilla={casilla}
+              fichas={fichas}
+              dispatch={dispatch}
+              dispatchBoard={dispatchBoard}
+            />
           ) : (
             ''
           )}
