@@ -1,12 +1,12 @@
 import React, { useRef } from 'react'
 
-const Piece = ({casilla, fichas, dispatch,dispatchBoard }) => {
+const Piece = ({casilla, fichas, dispatchPieces,dispatchBoard }) => {
 
 
   const selecFicha= (id)=>{
     const ficha = fichas.find((ficha)=> ficha.id ===id)
     if (!ficha) return
-    dispatch({
+    dispatchPieces({
       type:"SELECT_FICHA",
       payload:{
         id
@@ -16,15 +16,11 @@ const Piece = ({casilla, fichas, dispatch,dispatchBoard }) => {
       type: "ACTIVE_VALID",
       payload:{
         row: ficha.row + ficha.nextRow,
-        col :ficha.col,
+        col :ficha.col+ficha.nextCol,
         isValid:true
       }
     })
   }
-
-
-  
-
 
   return (
     <div>

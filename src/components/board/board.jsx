@@ -6,23 +6,29 @@ import { colocarFichas } from './colocarFichas'
 import { initialStateBoard, reducerBoard } from './reducerBoard'
 
 const Board = () => {
+
+  
   const [board, dispatchBoard] = useReducer(reducerBoard, initialStateBoard)
-  const [fichas, dispatch] = useReducer(reducer, initialStateChess)
+  const [fichas, dispatchPieces] = useReducer(reducer, initialStateChess)
 
   const moverFicha = (colBoard, rowBoard) => {
     const ficha = fichas.find((ficha) => ficha.active === true)
     if (!ficha) return
     const newRow = ficha.row + ficha.nextRow
-    const newCol = ficha.col
+    const newCol = ficha.col + ficha.nextCol
     if (rowBoard !== newRow) return
+    if (colBoard !== newCol) return
     if (newRow < 8) {
-      dispatch({
+      dispatchPieces({
         type: 'MOVE_FICHA',
         payload: {
           id: ficha.id,
           newRow: newRow,
           newCol: newCol
         }
+      })
+      dispatchBoard({
+        type: 'DESACTIVATE_VALID'
       })
     }
   }
@@ -48,7 +54,7 @@ const Board = () => {
             <Piece
               casilla={casilla}
               fichas={fichas}
-              dispatch={dispatch}
+              dispatchPieces={dispatchPieces}
               dispatchBoard={dispatchBoard}
             />
           ) : (

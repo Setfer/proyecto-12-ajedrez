@@ -16,7 +16,7 @@ export const initialStateChess = [
     row: 0,
     col: 1,
     nextRow: 1,
-    nextCol: 0,
+    nextCol: 1,
     active: false
   }
 ]
