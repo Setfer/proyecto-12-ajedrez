@@ -1,32 +1,12 @@
-import React, { useRef } from 'react'
+import React from 'react'
+import { selecFicha } from './selecFicha'
 
 const Piece = ({casilla, fichas, dispatchPieces,dispatchBoard }) => {
-
-
-  const selecFicha= (id)=>{
-    const ficha = fichas.find((ficha)=> ficha.id ===id)
-    if (!ficha) return
-    dispatchPieces({
-      type:"SELECT_FICHA",
-      payload:{
-        id
-      }
-    })
-    dispatchBoard({
-      type: "ACTIVE_VALID",
-      payload:{
-        row: ficha.row + ficha.nextRow,
-        col :ficha.col+ficha.nextCol,
-        isValid:true
-      }
-    })
-  }
 
   return (
     <div>
       <img
-    
-        onClick={() => selecFicha(casilla.ficha.id)}
+        onClick={() => selecFicha(casilla.ficha.id, fichas,dispatchPieces, dispatchBoard)}
         className='ficha'
         src={casilla.ficha.img}
       />

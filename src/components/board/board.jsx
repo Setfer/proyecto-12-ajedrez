@@ -1,37 +1,20 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import './board.css'
-import { initialStateChess, reducer } from '../chess/states/chessReducerPiece'
+import {
+  initialStateChess,
+  reducerChess
+} from '../states/reducerPieces/chessReducerPiece'
 import Piece from '../chess/piece/piece'
 import { colocarFichas } from './colocarFichas'
-import { initialStateBoard, reducerBoard } from './reducerBoard'
+import {
+  initialStateBoard,
+  reducerBoard
+} from '../states/reducerBoard/reducerBoard'
+import { movePiece } from './movePiece'
 
 const Board = () => {
-
-  
   const [board, dispatchBoard] = useReducer(reducerBoard, initialStateBoard)
-  const [fichas, dispatchPieces] = useReducer(reducer, initialStateChess)
-
-  const moverFicha = (colBoard, rowBoard) => {
-    const ficha = fichas.find((ficha) => ficha.active === true)
-    if (!ficha) return
-    const newRow = ficha.row + ficha.nextRow
-    const newCol = ficha.col + ficha.nextCol
-    if (rowBoard !== newRow) return
-    if (colBoard !== newCol) return
-    if (newRow < 8) {
-      dispatchPieces({
-        type: 'MOVE_FICHA',
-        payload: {
-          id: ficha.id,
-          newRow: newRow,
-          newCol: newCol
-        }
-      })
-      dispatchBoard({
-        type: 'DESACTIVATE_VALID'
-      })
-    }
-  }
+  const [fichas, dispatchPieces] = useReducer(reducerChess, initialStateChess)
 
   useEffect(() => {
     colocarFichas(fichas, dispatchBoard)
@@ -42,7 +25,13 @@ const Board = () => {
       {board.flat().map((casilla, index) => (
         <div
           onClick={() => {
-            moverFicha(casilla.col, casilla.row)
+            movePiece(
+              casilla.col,
+              casilla.row,
+              fichas,
+              dispatchPieces,
+              dispatchBoard
+            )
           }}
           className={`${casilla.color} ${
             casilla.isValid === true ? 'active' : ''

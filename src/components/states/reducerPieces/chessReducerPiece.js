@@ -5,7 +5,7 @@ export const initialStateChess = [
     img: 'public/assets/8146859.png',
     row: 0,
     col: 0,
-    nextRow: 2,
+    nextRow:[2,3],
     nextCol: 0,
     active: false
   },
@@ -21,7 +21,7 @@ export const initialStateChess = [
   }
 ]
 
-export const reducer = (state, action) => {
+export const reducerChess = (state, action) => {
   switch (action.type) {
     case 'MOVE_FICHA':
       return state.map((ficha) =>
