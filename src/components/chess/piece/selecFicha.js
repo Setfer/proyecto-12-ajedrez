@@ -10,8 +10,8 @@ export const selecFicha= (id, fichas, dispatchPieces, dispatchBoard)=>{
   dispatchBoard({
     type: "ACTIVE_VALID",
     payload:{
-      row: ficha.row + ficha.nextRow,
-      col :ficha.col+ficha.nextCol,
+      rows: ficha.nextRows.map((row)=>row+ficha.row),
+      cols :ficha.nextCols.map((col)=>col+ficha.col),
       isValid:true
     }
   })

@@ -25,12 +25,13 @@ export const reducerBoard = (state, action) => {
     case 'ACTIVE_VALID':
       return state.map((fila) =>
         fila.map((casilla) =>
-          casilla.row === action.payload.row &&
-          casilla.col === action.payload.col
+          action.payload.rows.some((row) => row === casilla.row) &&
+          action.payload.cols.some((col) => col === casilla.col)
             ? { ...casilla, isValid: action.payload.isValid }
-            : { ...casilla, isValid: false }
+            : casilla
         )
       )
+
     case 'DESACTIVATE_VALID':
       return state.map((fila) =>
         fila.map((casilla) => {
