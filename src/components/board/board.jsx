@@ -30,7 +30,8 @@ const Board = () => {
               casilla.row,
               fichas,
               dispatchPieces,
-              dispatchBoard
+              dispatchBoard,
+              board
             )
           }}
           className={`${casilla.color} ${

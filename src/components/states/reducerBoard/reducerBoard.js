@@ -17,7 +17,7 @@ export const reducerBoard = (state, action) => {
           const fichaEncontrada = action.payload.fichas.find(
             (ficha) => ficha.row === casilla.row && ficha.col === casilla.col
           )
-          return fichaEncontrada
+          return fichaEncontrada && fichaEncontrada.isDelete ===false
             ? { ...casilla, tieneFicha: true, ficha: fichaEncontrada }
             : { ...casilla, tieneFicha: false, ficha: null }
         })

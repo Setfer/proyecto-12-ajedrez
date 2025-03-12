@@ -5,9 +5,10 @@ export const initialStateChess = [
     img: 'public/assets/8146859.png',
     row: 0,
     col: 0,
-    nextRows: [2, 3],
-    nextCols: [0, 0],
-    active: false
+    nextRows: [0, 0],
+    nextCols: [1, 2],
+    active: false,
+    isDelete: false
   },
   {
     id: 1,
@@ -17,7 +18,8 @@ export const initialStateChess = [
     col: 1,
     nextRows: [1, 4],
     nextCols: [1, 1],
-    active: false
+    active: false,
+    isDelete: false
   }
 ]
 
@@ -40,6 +42,10 @@ export const reducerChess = (state, action) => {
           ? { ...ficha, active: true }
           : { ...ficha, active: false }
       )
+    case 'DELETE_PIECE':
+      return state.map((ficha) => {
+        ficha.id === action.payload.id ? { ...ficha, isDelete: true } : ficha
+      })
     default:
       return state
   }
