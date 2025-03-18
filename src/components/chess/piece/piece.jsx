@@ -1,14 +1,14 @@
 import React from 'react'
 import { selecFicha } from './selecFicha'
 
-const Piece = ({casilla, fichas, dispatchPieces,dispatchBoard }) => {
+const Piece = ({casilla, chess, dispatchChess,dispatchBoard }) => {
 
   return (
     <div>
       <img
-        onClick={() => selecFicha(casilla.ficha.id, fichas,dispatchPieces, dispatchBoard)}
+        onClick={() => selecFicha(casilla.piece.id, chess,dispatchChess, dispatchBoard)}
         className='ficha'
-        src={casilla.ficha.img}
+        src={casilla.piece.img}
       />
     </div>
   )

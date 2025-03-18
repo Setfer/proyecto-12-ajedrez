@@ -1,12 +1,15 @@
-export const colocarFichas = (fichas, dispatchBoard) => {
-  fichas.map((ficha) =>
+export const colocarFichas = (chess, dispatchBoard) => {
+
+  console.log(chess)
+
+  chess.pieces.map((piece) =>
     dispatchBoard({
       type: 'INSERT_PIECE',
       payload: {
-        ficha: ficha,
-        row: ficha.row,
-        col: ficha.col,
-        fichas:fichas
+        piece: piece,
+        row: piece.row,
+        col: piece.col,
+        pieces:chess.pieces
       }
     })
   )

@@ -1,37 +1,32 @@
 export const movePiece = (
   colBoard,
   rowBoard,
-  fichas,
-  dispatchPieces,
+  pieces,
+  dispatchChess,
   dispatchBoard,
   board
 ) => {
-  const ficha = fichas.find((ficha) => ficha.active === true)
-  if (!ficha) return
-  const newRows = ficha.nextRows.map((row) => row + ficha.row)
-  const newCols = ficha.nextCols.map((col) => col + ficha.col)
+  const piece = pieces.find((piece) => piece.active === true)
+  if (!piece) {
+    return
+  }
+  if (!board[rowBoard][colBoard].isValid)return
 
-  const esMovimientoValido = newRows.some(
-    (row, index) => row === rowBoard && newCols[index] === colBoard
-  )
-  if (!esMovimientoValido) return
-
-  console.log(board[rowBoard][colBoard].ficha.id)
-  if (board[rowBoard][colBoard].ficha){
-    dispatchPieces({
-      type: "DELETE_PIECE",
-      payload:{
-        id: board[rowBoard][colBoard].ficha.id
+  if (
+    board[rowBoard][colBoard].piece &&
+    board[rowBoard][colBoard].piece.color !== piece.color
+  ) {
+    dispatchChess({
+      type: 'DELETE_PIECE',
+      payload: {
+        id: board[rowBoard][colBoard].piece.id
       }
     })
   }
-
-
-
-  dispatchPieces({
+  dispatchChess({
     type: 'MOVE_FICHA',
     payload: {
-      id: ficha.id,
+      id: piece.id,
       newRow: rowBoard,
       newCol: colBoard
     }

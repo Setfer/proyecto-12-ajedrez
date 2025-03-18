@@ -14,11 +14,11 @@ import { movePiece } from './movePiece'
 
 const Board = () => {
   const [board, dispatchBoard] = useReducer(reducerBoard, initialStateBoard)
-  const [fichas, dispatchPieces] = useReducer(reducerChess, initialStateChess)
+  const [Chess, dispatchChess] = useReducer(reducerChess, initialStateChess)
 
   useEffect(() => {
-    colocarFichas(fichas, dispatchBoard)
-  }, [fichas])
+    colocarFichas(Chess, dispatchBoard)
+  }, [Chess.pieces])
 
   return (
     <div className='board'>
@@ -28,8 +28,8 @@ const Board = () => {
             movePiece(
               casilla.col,
               casilla.row,
-              fichas,
-              dispatchPieces,
+              Chess.pieces,
+              dispatchChess,
               dispatchBoard,
               board
             )
@@ -40,11 +40,11 @@ const Board = () => {
           key={index}
         >
           <p>{casilla.color}</p>
-          {casilla.ficha ? (
+          {casilla.piece ? (
             <Piece
               casilla={casilla}
-              fichas={fichas}
-              dispatchPieces={dispatchPieces}
+              chess={Chess}
+              dispatchChess={dispatchChess}
               dispatchBoard={dispatchBoard}
             />
           ) : (
