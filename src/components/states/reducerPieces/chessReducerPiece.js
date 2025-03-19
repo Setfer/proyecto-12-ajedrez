@@ -5,7 +5,7 @@ export const initialStateChess = {
       type: 'peon',
       img: 'public/assets/8146859.png',
       row: 1,
-      col: 0,
+      col: 1,
       nextRows: [1, 0],
       nextCols: [0, 0],
       active: false,

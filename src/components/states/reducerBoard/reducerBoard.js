@@ -25,15 +25,15 @@ export const reducerBoard = (state, action) => {
     case 'ACTIVE_VALID':
       return state.map((fila) =>
         fila.map((casilla) => {
-
           const isOpponentPiece =
             casilla.piece && casilla.piece.color !== action.payload.color
-          const isValidRow = action.payload.rows.includes(casilla.row)
-          const isValidCol = action.payload.cols.includes(casilla.col)
-
-          return isValidRow && isValidCol && (!casilla.piece || isOpponentPiece)
-            ? { ...casilla, isValid: action.payload.isValid }
-            : casilla
+          const isValid = action.payload.rows.some(
+            (row, index) =>
+              row === casilla.row && action.payload.cols[index] === casilla.col
+          )
+          return isValid && (!casilla.piece || isOpponentPiece)
+            ? { ...casilla, isValid: true }
+            : { ...casilla, isValid: false }
         })
       )
 
