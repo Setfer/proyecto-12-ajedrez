@@ -39,13 +39,14 @@ const Board = () => {
           }`}
           key={index}
         >
-          <p>{casilla.color}</p>
+          <p>{casilla.color}{casilla.row}, {casilla.col}</p>
           {casilla.piece ? (
             <Piece
               casilla={casilla}
               chess={Chess}
               dispatchChess={dispatchChess}
               dispatchBoard={dispatchBoard}
+              board ={board}
             />
           ) : (
             ''

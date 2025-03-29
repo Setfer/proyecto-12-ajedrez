@@ -15,7 +15,7 @@ export const reducerBoard = (state, action) => {
       return state.map((fila) =>
         fila.map((casilla) => {
           const pieceFind = action.payload.pieces.find(
-            (piece) => piece.row === casilla.row && piece.col === casilla.col
+            (piece) => piece.row === casilla.row && piece.col === casilla.col && piece.isDelete ===false
           )
           return pieceFind
             ? { ...casilla, tieneFicha: true, piece: pieceFind }
