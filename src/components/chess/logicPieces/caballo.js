@@ -11,7 +11,6 @@ export const caballo = (piece, board) => {
     nextRowsMoves.push(newRow)
     nextColsMoves.push(newCol)
   })
-  console.log(nextRowsMoves, nextColsMoves)
   return {
 
     rows: nextRowsMoves,

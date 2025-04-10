@@ -15,8 +15,6 @@ export const peon = (piece, board) => {
         (casilla.col === col + 1 || casilla.col === col - 1)
     )
 
-
-
   //nuevas posibles filas
   const nextRowsMove = [
     ...nextRows.map((r) => r + row),
@@ -33,35 +31,29 @@ export const peon = (piece, board) => {
   const primerMovimiento = row === 1 || row === 6 ? true : false
 
   //si tiene una ficha delante
-  const fichaDelante = board
-    .flat()
-    .filter(
-      (casilla) =>
-        casilla.piece &&
-        casilla.piece.color !== color &&
-        casilla.row === row + direction
-    )
-    console.log(fichaDelante)
+  const fichaDelante = board[row + direction]?.[col]?.piece
+
   //si puede doble paso
   const doubleMove =
     primerMovimiento &&
     row === startRow &&
-    fichaDelante.length === 0 &&
+    !fichaDelante &&
     !board[dobleMoveRow][col]?.piece
-console.log(doubleMove, fichaDelante.length)
+  console.log(doubleMove, fichaDelante)
 
   if (doubleMove) {
     nextRowsMove.push(dobleMoveRow)
     nextColsMove.push(col)
   }
 
-  if (fichaDelante.length > 0) {
+  if (fichaDelante) {
     return {
       rows: piezasParaComer.map((p) => p.row),
       cols: piezasParaComer.map((p) => p.col),
       color: color
     }
   }
+
   return {
     rows: nextRowsMove,
     cols: nextColsMove,

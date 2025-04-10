@@ -10,8 +10,7 @@ export const movePiece = (
   if (!piece) {
     return
   }
-  if (!board[rowBoard][colBoard].isValid)return
-
+  if (!board[rowBoard][colBoard].isValid) return
   if (
     board[rowBoard][colBoard].piece &&
     board[rowBoard][colBoard].piece.color !== piece.color
@@ -23,14 +22,26 @@ export const movePiece = (
       }
     })
   }
+
   dispatchChess({
-    type: 'MOVE_FICHA',
+    type: 'MOVE_PIECE',
     payload: {
       id: piece.id,
       newRow: rowBoard,
       newCol: colBoard
     }
   })
+
+  const lasRow = piece.color === 'white' ? 7 : 0
+  if (piece.type === 'peon' && rowBoard === lasRow) {
+    dispatchChess({
+      type: 'UPDATE_PAWN',
+      payload: {
+        id: piece.id
+      }
+    })
+  }
+
   dispatchBoard({
     type: 'DESACTIVATE_VALID'
   })

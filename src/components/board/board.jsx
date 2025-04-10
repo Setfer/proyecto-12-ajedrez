@@ -1,24 +1,18 @@
 import React, { useEffect, useReducer } from 'react'
 import './board.css'
-import {
-  initialStateChess,
-  reducerChess
-} from '../states/reducerPieces/chessReducerPiece'
-import Piece from '../chess/piece/piece'
-import { colocarFichas } from './colocarFichas'
-import {
-  initialStateBoard,
-  reducerBoard
-} from '../states/reducerBoard/reducerBoard'
+import { setPieces } from './setPieces'
+import Piece from '../chess/Piece'
+
+import { initialStateBoard, reducerBoard } from '../states/BoardReducer'
 import { movePiece } from './movePiece'
 
-const Board = () => {
+const Board = ({ game, dispatchGame, selectPiece }) => {
   const [board, dispatchBoard] = useReducer(reducerBoard, initialStateBoard)
-  const [Chess, dispatchChess] = useReducer(reducerChess, initialStateChess)
-
+  console.log(game)
   useEffect(() => {
-    colocarFichas(Chess, dispatchBoard)
-  }, [Chess.pieces])
+    setPieces(game, dispatchBoard)
+    console.log(game)
+  }, [game.pieces])
 
   return (
     <div className='board'>
@@ -28,8 +22,8 @@ const Board = () => {
             movePiece(
               casilla.col,
               casilla.row,
-              Chess.pieces,
-              dispatchChess,
+              game.pieces,
+              dispatchGame,
               dispatchBoard,
               board
             )
@@ -39,14 +33,18 @@ const Board = () => {
           }`}
           key={index}
         >
-          <p>{casilla.color}{casilla.row}, {casilla.col}</p>
+          <p>
+            {casilla.color}
+            {casilla.row}, {casilla.col}
+          </p>
           {casilla.piece ? (
             <Piece
               casilla={casilla}
-              chess={Chess}
-              dispatchChess={dispatchChess}
+              game={game}
+              dispatchGame={dispatchGame}
               dispatchBoard={dispatchBoard}
-              board ={board}
+              board={board}
+              selectPiece={selectPiece}
             />
           ) : (
             ''
