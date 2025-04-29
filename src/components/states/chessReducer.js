@@ -431,7 +431,7 @@ export const reducerChess = (state, action) => {
         (piece) => piece.id === action.payload.id
       )
 
-      // Si la pieza eliminada es un rey ganada el color contrario
+      // Si la pieza eliminada es un rey gana el color contrario
       const newWinner =
         deletedPiece?.type === 'rey'
           ? deletedPiece.color === 'white'

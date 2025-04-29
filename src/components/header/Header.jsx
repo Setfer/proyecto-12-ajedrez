@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
+import "./header.css"
 
 
 const Header = () => {
@@ -8,7 +8,7 @@ const Header = () => {
     <header> <nav>
     <ul>
       <li>
-        <NavLink to="/chess">chess</NavLink>
+        <NavLink to="/chess">Chess</NavLink>
       </li>
       <li>
         <NavLink to="/draughts">Draughts</NavLink>

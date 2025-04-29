@@ -1,17 +1,17 @@
 import React, { useEffect, useReducer } from 'react'
 import './board.css'
 import { setPieces } from './setPieces'
-import Piece from '../chess/Piece'
+
 
 import { initialStateBoard, reducerBoard } from '../states/BoardReducer'
-import { movePiece } from './movePiece'
+import Piece from '../piece/Piece'
 
-const Board = ({ game, dispatchGame, selectPiece }) => {
+
+const Board = ({ game, dispatchGame, selectPiece, movePiece }) => {
   const [board, dispatchBoard] = useReducer(reducerBoard, initialStateBoard)
-  console.log(game)
+
   useEffect(() => {
     setPieces(game, dispatchBoard)
-    console.log(game)
   }, [game.pieces])
 
   return (
@@ -29,14 +29,10 @@ const Board = ({ game, dispatchGame, selectPiece }) => {
             )
           }}
           className={`${casilla.color} ${
-            casilla.isValid === true ? 'active' : ''
+            casilla.isValid === true ? 'valid-move' : ''
           }`}
           key={index}
         >
-          <p>
-            {casilla.color}
-            {casilla.row}, {casilla.col}
-          </p>
           {casilla.piece ? (
             <Piece
               casilla={casilla}

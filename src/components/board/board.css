@@ -1,18 +1,42 @@
 .board {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, 1fr);
-  gap: 5px;
+  grid-template-columns: repeat(8, 60px);
+  grid-template-rows: repeat(8, 60px);
+  gap: 0;
+  border: 2px solid #333;
+  width: 485px;
 }
 
-.black{
-  background-color: rgba(0, 0, 0, 0.541);
+.white,
+.black {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.ficha{
-  height: 20px;
+.white {
+  background-color: #e0e0e0;
 }
 
-.active{
-  background-color: red;
+.black {
+  background-color: #6f6f6f;
+}
+
+@keyframes blink-red {
+  0%,
+  100% {
+  }
+  50% {
+   border:3px solid red;
+  }
+}
+
+.white.valid-move {
+  animation: blink-red 1s infinite;
+
+}
+.black.valid-move {
+  animation: blink-red 1s infinite;
 }

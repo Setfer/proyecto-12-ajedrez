@@ -1,4 +1,4 @@
-export const movePiece = (
+export const movePieceChess = (
   colBoard,
   rowBoard,
   pieces,

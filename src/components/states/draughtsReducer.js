@@ -7,7 +7,7 @@ export const initialStateDraugths = {
       return {
         id: i,
         type: 'man', // 'man' o 'king'
-        img: 'public/assets/dama_blanca.png',
+        img: 'public/assets/white_man.png',
         row,
         col,
         nextRows: [1, 1],
@@ -25,7 +25,7 @@ export const initialStateDraugths = {
       return {
         id: i + 12,
         type: 'man',
-        img: 'public/assets/dama_negra.png',
+        img: 'public/assets/black_man.png',
         row,
         col,
         nextRows: [-1, -1],
@@ -55,7 +55,11 @@ export const reducerDraugths = (state, action) => {
               }
             : piece
         ),
-        turno: state.turno === 'white' ? 'black' : 'white'
+        turno: action.payload.stayTurn
+          ? state.turno
+          : state.turno === 'white'
+          ? 'black'
+          : 'white'
       }
 
     case 'SELECT_PIECE':
@@ -67,5 +71,53 @@ export const reducerDraugths = (state, action) => {
             : { ...piece, active: false }
         )
       }
+    case 'DELETE_PIECE': {
+      const updatedPieces = state.pieces.map((piece) =>
+        piece.id === action.payload.id ? { ...piece, isDelete: true } : piece
+      )
+      const pieceDeleted = state.pieces.find((p) => p.id === action.payload.id)
+
+      const allDeleted = updatedPieces
+        .filter((p) => p.color === pieceDeleted.color)
+        .every((p) => p.isDelete === true)
+
+      const newWiner =
+        allDeleted === true
+          ? pieceDeleted.color === 'white'
+            ? 'black'
+            : 'white'
+          : state.winner
+
+      return {
+        ...state,
+        pieces: updatedPieces,
+        winner: newWiner
+      }
+    }
+
+    case 'PROMOTE_MAN': {
+      const updatedPieces = state.pieces.map((piece) =>
+        piece.id === action.payload.id
+          ? {
+              ...piece,
+              type: 'king',
+              img:
+                piece.color === 'white'
+                  ? 'public/assets/white_cro.png'
+                  : 'public/assets/black_cro.png'
+            }
+          : piece
+      )
+      return {
+        ...state,
+        pieces: updatedPieces
+      }
+    }
+    case 'SET_WINNER': {
+      return {
+        ...state,
+        winner: action.payload
+      }
+    }
   }
 }
