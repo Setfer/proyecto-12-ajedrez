@@ -1,5 +1,4 @@
 export const setPieces = (game, dispatchBoard) => {
-  console.log(game)
 
   
   game.pieces.map((piece) => {

@@ -389,7 +389,7 @@ export const initialStateChess = {
       color: 'black'
     }
   ],
-  turno: 'white',
+  turn: 'white',
   winner: null
 }
 
@@ -408,7 +408,7 @@ export const reducerChess = (state, action) => {
               }
             : piece
         ),
-        turno: state.turno === 'white' ? 'black' : 'white'
+        turn: state.turn === 'white' ? 'black' : 'white'
       }
 
     case 'SELECT_PIECE':
@@ -464,6 +464,9 @@ export const reducerChess = (state, action) => {
             : piece
         )
       }
+
+      case "RESET_GAME":
+        return initialStateChess
 
     default:
       return state

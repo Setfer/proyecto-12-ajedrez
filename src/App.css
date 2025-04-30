@@ -28,7 +28,7 @@ main {
   font-size: 28px;
   font-weight: bold;
   text-align: center;
-  margin-top: 20px;
+  margin-bottom: 1rem;
   animation: blink 1s infinite;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   color: #ffffff; /* verde suave para victoria blanca */
@@ -38,7 +38,7 @@ main {
   font-size: 28px;
   font-weight: bold;
   text-align: center;
-  margin-top: 20px;
+  margin-bottom: 1rem;
   animation: blink 1s infinite;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   color: #000000; /* azul para victoria negra */

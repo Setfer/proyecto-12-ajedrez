@@ -1,8 +1,8 @@
 import React from 'react'
-import "./piece.css"
+import './piece.css'
 
 const Piece = ({
-  casilla,
+  square,
   game,
   dispatchGame,
   dispatchBoard,
@@ -13,16 +13,10 @@ const Piece = ({
     <div>
       <img
         onClick={() =>
-          selectPiece(
-            casilla.piece.id,
-            game,
-            dispatchGame,
-            dispatchBoard,
-            board
-          )
+          selectPiece(square.piece.id, game, dispatchGame, dispatchBoard, board)
         }
-        className='ficha'
-        src={casilla.piece.img}
+        className='piece'
+        src={square.piece.img}
       />
     </div>
   )

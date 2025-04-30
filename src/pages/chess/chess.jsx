@@ -1,30 +1,35 @@
 import React, { useReducer } from 'react'
 
+import { movePieceChess } from '../../states/chess/movePieceChess'
+import './chess.css'
+import Board from '../../components/board/Board'
 import {
   initialStateChess,
   reducerChess
-} from '../../components/states/chessReducer'
-import Board from '../../components/board/board'
-import { selectPieceChess } from '../../components/chess/selectPieceChess'
-import { movePieceChess } from '../../components/chess/movePieceChess'
-import "./chess.css"
+} from '../../states/chess/chessReducer'
+import { selectPieceChess } from '../../states/chess/selectPieceChess'
+import Reset from '../../components/butonReset/reset'
 
 const Chess = () => {
   const [Chess, dispatchChess] = useReducer(reducerChess, initialStateChess)
   return (
     <div className='chess'>
-      <p className={`turn-${Chess.turno}`} >Its {Chess.turno}`s turn</p>
+      {Chess.winner === null && (
+        <p className={`turn-${Chess.turn}`}>Its {Chess.turn}`s turn</p>
+      )}
+      {Chess.winner !== null && (
+        <p className={`winner-${Chess.winner}`}>
+          The Winner is: {Chess.winner}
+        </p>
+      )}
       <Board
         game={Chess}
         dispatchGame={dispatchChess}
         selectPiece={selectPieceChess}
         movePiece={movePieceChess}
       />
-     {Chess.winner !== null && (
-        <p className={`winner-${Chess.winner}`}>
-          The Winner is: {Chess.winner}
-        </p>
-      )}
+
+      <Reset dispatchGame={dispatchChess} />
     </div>
   )
 }

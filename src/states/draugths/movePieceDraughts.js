@@ -1,7 +1,5 @@
-import { king } from "./logicPiecesDraughts/king"
-import { man } from "./logicPiecesDraughts/man"
-
-
+import { king } from '../../states/draugths/logicPiecesDraughts/king'
+import { man } from '../../states/draugths/logicPiecesDraughts/man'
 
 export const movePieceDraughts = (
   colBoard,
@@ -21,19 +19,18 @@ export const movePieceDraughts = (
 
   const getPossibleJumps = (p, board) => {
     const result = p.type === 'king' ? king(p, board) : man(p, board)
-  
+
     return result.rows
       .map((r, i) => {
         const rowDiff = r - p.row
         const colDiff = result.cols[i] - p.col
-  
+
         return Math.abs(rowDiff) === 2 && Math.abs(colDiff) === 2
           ? [rowDiff, colDiff]
           : null
       })
       .filter(Boolean) // elimina los null
   }
-  
 
   if (isJump) {
     const midRow = piece.row + rowDiff / 2
@@ -47,7 +44,7 @@ export const movePieceDraughts = (
       })
     }
   }
-  // Recalculamos si puede volver a saltar desde la nueva posición
+  // Recalculamos si puede volver a saltar desde la nueva posicion
   const updatedPiece = {
     ...piece,
     row: rowBoard,
@@ -68,7 +65,7 @@ export const movePieceDraughts = (
     }
   })
 
-  // Promoción a dama
+  // Promocian a dama
   const lastRow = piece.color === 'white' ? 7 : 0
   const becameKing = piece.type === 'man' && rowBoard === lastRow
 
@@ -78,11 +75,11 @@ export const movePieceDraughts = (
       payload: { id: piece.id }
     })
     dispatchBoard({ type: 'DESACTIVATE_VALID' })
-    return // ya no puede saltar más
+    return // ya no puede saltar mas
   }
 
   if (isJump && moreJumps.length > 0) {
-    // Mantener activa la ficha y calcular nuevas casillas válidas
+    // Mantener activa la ficha y calcular nuevas squares válidas
     dispatchDraughts({
       type: 'SELECT_PIECE',
       payload: { id: piece.id }

@@ -36,7 +36,7 @@ export const initialStateDraugths = {
       }
     })
   ],
-  turno: 'white',
+  turn: 'white',
   winner: null
 }
 
@@ -55,9 +55,9 @@ export const reducerDraugths = (state, action) => {
               }
             : piece
         ),
-        turno: action.payload.stayTurn
-          ? state.turno
-          : state.turno === 'white'
+        turn: action.payload.stayTurn
+          ? state.turn
+          : state.turn === 'white'
           ? 'black'
           : 'white'
       }
@@ -119,5 +119,10 @@ export const reducerDraugths = (state, action) => {
         winner: action.payload
       }
     }
+    case 'RESET_GAME':
+      return initialStateDraugths
+
+      default:
+        return state
   }
 }

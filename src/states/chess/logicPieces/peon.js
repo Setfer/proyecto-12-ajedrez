@@ -8,11 +8,11 @@ export const peon = (piece, board) => {
   const piezasParaComer = board
     .flat()
     .filter(
-      (casilla) =>
-        casilla.piece &&
-        casilla.piece.color !== color &&
-        casilla.row === row + direction &&
-        (casilla.col === col + 1 || casilla.col === col - 1)
+      (square) =>
+        square.piece &&
+        square.piece.color !== color &&
+        square.row === row + direction &&
+        (square.col === col + 1 || square.col === col - 1)
     )
 
   //nuevas posibles filas
@@ -31,22 +31,22 @@ export const peon = (piece, board) => {
   const primerMovimiento = row === 1 || row === 6 ? true : false
 
   //si tiene una ficha delante
-  const fichaDelante = board[row + direction]?.[col]?.piece
+  const pieceInFront = board[row + direction]?.[col]?.piece
 
   //si puede doble paso
   const doubleMove =
     primerMovimiento &&
     row === startRow &&
-    !fichaDelante &&
+    !pieceInFront &&
     !board[dobleMoveRow][col]?.piece
-  console.log(doubleMove, fichaDelante)
+  console.log(doubleMove, pieceInFront)
 
   if (doubleMove) {
     nextRowsMove.push(dobleMoveRow)
     nextColsMove.push(col)
   }
 
-  if (fichaDelante) {
+  if (pieceInFront) {
     return {
       rows: piezasParaComer.map((p) => p.row),
       cols: piezasParaComer.map((p) => p.col),

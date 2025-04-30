@@ -5,7 +5,7 @@ export const alfil = (piece, board) => {
   const nextColsMoves = []
 
   nextRows.forEach((r, index) => {
-    //creamos movimientos dentro del tabler
+    //creamos movimientos dentro del tablero
     for (let i = 1; i <= 7; i++) {
       const newRow = row + r * i
       const newCol = col + nextCols[index] * i
