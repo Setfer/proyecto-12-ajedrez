@@ -1,25 +1,13 @@
 import React from 'react'
 import './piece.css'
 
-const Piece = ({
-  square,
-  game,
-  dispatchGame,
-  dispatchBoard,
-  board,
-  selectPiece
-}) => {
+const Piece = React.memo(({ id, img, onClick }) => {
+  console.log('SOY PIECE' )
   return (
     <div>
-      <img
-        onClick={() =>
-          selectPiece(square.piece.id, game, dispatchGame, dispatchBoard, board)
-        }
-        className='piece'
-        src={square.piece.img}
-      />
+      <img className='piece' src={img} onClick={() => onClick(id)} />
     </div>
   )
-}
+})
 
 export default Piece

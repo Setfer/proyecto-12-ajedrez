@@ -1,6 +1,4 @@
-export const setPieces = (game, dispatchBoard) => {
-
-  
+export const setPieces = (game,dispatchBoard ) => {
   game.pieces.map((piece) => {
     if (piece.isDelete === true) {
       return

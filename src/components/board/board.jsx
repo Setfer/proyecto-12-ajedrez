@@ -1,20 +1,13 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useCallback } from 'react'
 import './board.css'
-import { setPieces } from '../../states/board/setPieces'
 
-import {
-  initialStateBoard,
-  reducerBoard
-} from '../../states/board/BoardReducer'
-import Piece from '../piece/Piece'
+import Piece from '../Piece/Piece'
+import { useBoard } from '../../custom/useBoard'
 
 const Board = ({ game, dispatchGame, selectPiece, movePiece }) => {
-  const [board, dispatchBoard] = useReducer(reducerBoard, initialStateBoard)
+  const { board, dispatchBoard, memoizedSelectPiece } = useBoard(game, selectPiece, dispatchGame)
 
-  useEffect(() => {
-    setPieces(game, dispatchBoard)
-  }, [game.pieces])
-
+  console.log('soy board')
   return (
     <div className='board'>
       {board.flat().map((square, index) => (
@@ -36,12 +29,9 @@ const Board = ({ game, dispatchGame, selectPiece, movePiece }) => {
         >
           {square.piece && (
             <Piece
-              square={square}
-              game={game}
-              dispatchGame={dispatchGame}
-              dispatchBoard={dispatchBoard}
-              board={board}
-              selectPiece={selectPiece}
+              id={square.piece.id}
+              img={square.piece.img}
+              onClick={()=> memoizedSelectPiece(square.piece.id)}
             />
           )}
         </div>

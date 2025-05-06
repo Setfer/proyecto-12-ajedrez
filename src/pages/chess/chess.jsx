@@ -1,17 +1,28 @@
-import React, { useReducer } from 'react'
+import React, { useCallback, useReducer } from 'react'
 
 import { movePieceChess } from '../../states/chess/movePieceChess'
 import './chess.css'
 import Board from '../../components/board/Board'
+import { selectPieceChess } from '../../states/chess/selectPieceChess'
+import Reset from '../../components/butonReset/reset'
 import {
   initialStateChess,
   reducerChess
 } from '../../states/chess/chessReducer'
-import { selectPieceChess } from '../../states/chess/selectPieceChess'
-import Reset from '../../components/butonReset/reset'
+
 
 const Chess = () => {
+  console.log('soy CHESS')
   const [Chess, dispatchChess] = useReducer(reducerChess, initialStateChess)
+
+
+  const memoizedSelectPieceChess = useCallback(
+    (id, game, dispatchGame, dispatchBoard, board) => {
+      selectPieceChess(id, game, dispatchGame, dispatchBoard, board)
+    },
+    []
+  )
+
   return (
     <div className='chess'>
       {Chess.winner === null && (
@@ -25,7 +36,7 @@ const Chess = () => {
       <Board
         game={Chess}
         dispatchGame={dispatchChess}
-        selectPiece={selectPieceChess}
+        selectPiece={memoizedSelectPieceChess}
         movePiece={movePieceChess}
       />
 
