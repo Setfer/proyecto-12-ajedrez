@@ -8,3 +8,18 @@
 .piece:hover {
   transform: scale(1.1);
 }
+
+@media (max-width: 1024px) {
+  .piece {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .piece {
+    width: 25px;
+    height: 25px;
+  }
+}

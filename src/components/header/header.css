@@ -1,10 +1,11 @@
 header {
   width: 100dvw;
-  background-color: #1e1e1e;
+  background-color: var(--color-footer-header-bg);
   padding: 1rem 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: var(--color-footer-header-text);
+  height: var(--footer-height);
 }
-
 nav ul {
   display: flex;
   gap: 2rem;
@@ -14,22 +15,19 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color: #aaa;
-  font-weight: 500;
+  color: var(--color-nav-link);
+  font-weight: var(--font-weight-semibold);
   position: relative;
   padding-bottom: 0.2rem;
   transition: color 0.3s;
 }
-
 nav a:hover {
-  color: #fff;
+  color: var(--color-nav-link-hover);
 }
-
 nav a.active,
 nav a[aria-current="page"] {
-  color: #fff;
+  color: var(--color-nav-link-hover);
 }
-
 nav a.active::after,
 nav a[aria-current="page"]::after {
   content: '';
@@ -38,5 +36,5 @@ nav a[aria-current="page"]::after {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #fff;
+  background-color: var(--color-nav-link-hover);
 }

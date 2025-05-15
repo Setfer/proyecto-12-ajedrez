@@ -1,40 +1,46 @@
 import React, { useCallback } from 'react'
 import './board.css'
-
-import Piece from '../Piece/Piece'
 import { useBoard } from '../../custom/useBoard'
+import Square from '../square/square'
+
+
 
 const Board = ({ game, dispatchGame, selectPiece, movePiece }) => {
-  const { board, dispatchBoard, memoizedSelectPiece } = useBoard(game, selectPiece, dispatchGame)
+  const { board, dispatchBoard } = useBoard(game, selectPiece, dispatchGame)
+
+  const memoizedSelectPiece = useCallback(
+    (id) => {
+      console.log(board)
+      selectPiece(id, game, dispatchGame, dispatchBoard, board)
+    },
+    [selectPiece, dispatchGame, dispatchBoard, board]
+  )
+
+  const memoizedMovePiece = useCallback(
+    (square) => {
+      movePiece(
+        square.col,
+        square.row,
+        game.pieces,
+        dispatchGame,
+        dispatchBoard,
+        board
+      )
+    },
+    [movePiece, game.pieces, dispatchGame, dispatchBoard,board]
+  )
 
   console.log('soy board')
+
   return (
     <div className='board'>
       {board.flat().map((square, index) => (
-        <div
-          onClick={() => {
-            movePiece(
-              square.col,
-              square.row,
-              game.pieces,
-              dispatchGame,
-              dispatchBoard,
-              board
-            )
-          }}
-          className={`${square.color} ${
-            square.isValid === true ? 'valid-move' : ''
-          }`}
+        <Square
           key={index}
-        >
-          {square.piece && (
-            <Piece
-              id={square.piece.id}
-              img={square.piece.img}
-              onClick={()=> memoizedSelectPiece(square.piece.id)}
-            />
-          )}
-        </div>
+          square={square}
+          selectPiece={memoizedSelectPiece}
+          movePiece={memoizedMovePiece}
+        />
       ))}
     </div>
   )

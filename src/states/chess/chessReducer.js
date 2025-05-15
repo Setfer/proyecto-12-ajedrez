@@ -465,8 +465,11 @@ export const reducerChess = (state, action) => {
         )
       }
 
-      case "RESET_GAME":
-        return initialStateChess
+case 'RESET_GAME':
+  return {
+    ...initialStateChess,
+    pieces: initialStateChess.pieces.map(piece => ({ ...piece })) 
+  }
 
     default:
       return state

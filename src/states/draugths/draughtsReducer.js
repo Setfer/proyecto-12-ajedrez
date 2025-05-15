@@ -6,7 +6,7 @@ export const initialStateDraugths = {
       const col = (i % 4) * 2 + ((row + 1) % 2)
       return {
         id: i,
-        type: 'man', // 'man' o 'king'
+        type: 'man', 
         img: 'public/assets/white_man.png',
         row,
         col,

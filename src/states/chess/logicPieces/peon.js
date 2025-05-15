@@ -39,7 +39,7 @@ export const peon = (piece, board) => {
     row === startRow &&
     !pieceInFront &&
     !board[dobleMoveRow][col]?.piece
-  console.log(doubleMove, pieceInFront)
+
 
   if (doubleMove) {
     nextRowsMove.push(dobleMoveRow)

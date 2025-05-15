@@ -2,41 +2,36 @@ import React, { useCallback, useReducer } from 'react'
 
 import { movePieceChess } from '../../states/chess/movePieceChess'
 import './chess.css'
-import Board from '../../components/board/Board'
+
 import { selectPieceChess } from '../../states/chess/selectPieceChess'
-import Reset from '../../components/butonReset/reset'
+
 import {
   initialStateChess,
   reducerChess
 } from '../../states/chess/chessReducer'
+import Board from '../../components/board/board'
+import Reset from '../../components/butonReset/Reset'
 
 
 const Chess = () => {
   console.log('soy CHESS')
-  const [Chess, dispatchChess] = useReducer(reducerChess, initialStateChess)
+  const [chess, dispatchChess] = useReducer(reducerChess, initialStateChess)
 
-
-  const memoizedSelectPieceChess = useCallback(
-    (id, game, dispatchGame, dispatchBoard, board) => {
-      selectPieceChess(id, game, dispatchGame, dispatchBoard, board)
-    },
-    []
-  )
 
   return (
     <div className='chess'>
-      {Chess.winner === null && (
-        <p className={`turn-${Chess.turn}`}>Its {Chess.turn}`s turn</p>
+      {chess.winner === null && (
+        <p className={`turn-${chess.turn}`}>Its {chess.turn}`s turn</p>
       )}
-      {Chess.winner !== null && (
-        <p className={`winner-${Chess.winner}`}>
-          The Winner is: {Chess.winner}
+      {chess.winner !== null && (
+        <p className={`winner-${chess.winner}`}>
+          The Winner is: {chess.winner}
         </p>
       )}
       <Board
-        game={Chess}
+        game={chess}
         dispatchGame={dispatchChess}
-        selectPiece={memoizedSelectPieceChess}
+        selectPiece={selectPieceChess}
         movePiece={movePieceChess}
       />
 

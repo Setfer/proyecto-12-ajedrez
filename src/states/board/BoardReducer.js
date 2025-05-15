@@ -8,23 +8,22 @@ export const initialStateBoard = Array.from({ length: 8 }, (_, row) =>
     isValid: false
   }))
 )
-
 export const reducerBoard = (state, action) => {
   switch (action.type) {
-    case `INSERT_PIECE`:
-      return state.map((fila) =>
-        fila.map((square) => {
-          const pieceFind = action.payload.pieces.find(
-            (piece) =>
-              piece.row === square.row &&
-              piece.col === square.col &&
-              piece.isDelete === false
-          )
-          return pieceFind
-            ? { ...square, hasPiece: true, piece: pieceFind }
-            : { ...square, hasPiece: false, piece: null }
-        })
-      )
+case 'INSERT_PIECES':
+  return state.map((fila) =>
+    fila.map((square) => {
+      const pieceFind = action.payload.find(
+        (piece) =>
+          piece.row === square.row &&
+          piece.col === square.col &&
+          piece.isDelete === false 
+      );
+      return pieceFind
+        ? { ...square, hasPiece: true, piece: pieceFind }
+        : { ...square, hasPiece: false, piece: null };
+    })
+  );
     case 'ACTIVE_VALID':
       return state.map((fila) =>
         fila.map((square) => {
@@ -42,9 +41,7 @@ export const reducerBoard = (state, action) => {
 
     case 'DESACTIVATE_VALID':
       return state.map((fila) =>
-        fila.map((square) => {
-          return { ...square, isValid: false }
-        })
+        fila.map((square) => ({ ...square, isValid: false }))
       )
 
     default:

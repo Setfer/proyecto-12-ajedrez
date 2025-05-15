@@ -1,33 +1,42 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Fuentes y tipografía */
+  --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --line-height: 1.5;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 700;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Colores principales */
+  --color-text-light: rgba(255, 255, 255, 0.87);
+  --color-text-dark: #213547;
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #242424;
+  --color-link: #646cff;
+  --color-link-hover-light: #747bff;
+  --color-link-hover-dark: #535bf2;
+  --color-button-bg-light: #f9f9f9;
+  --color-button-bg-dark: #1a1a1a;
+  --color-border-default: #333;
+  --color-white-square: #e0e0e0;
+  --color-black-square: #6f6f6f;
+  --color-footer-header-bg: #1e1e1e;
+  --color-footer-header-text: #fff;
+  --color-nav-link: #aaa;
+  --color-nav-link-hover: #fff;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* Tamaños */
+  --board-size-desktop: 60px;
+  --board-size-tablet: 55px;
+  --board-size-mobile: 40px;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  --piece-size-desktop: 40px;
+  --piece-size-tablet: 35px;
+  --piece-size-mobile: 25px;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  /* Otros */
+  --border-radius: 8px;
+  --transition-default: 0.25s;
+  --footer-height: 7dvh;
 }
 
 h1 {

@@ -79,7 +79,7 @@ export const movePieceDraughts = (
   }
 
   if (isJump && moreJumps.length > 0) {
-    // Mantener activa la ficha y calcular nuevas squares válidas
+    // Mantener activa la ficha y calcular nuevas squares validas
     dispatchDraughts({
       type: 'SELECT_PIECE',
       payload: { id: piece.id }

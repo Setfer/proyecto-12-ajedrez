@@ -1,14 +1,15 @@
 import { useReducer } from 'react'
 
 import './draughts.css'
-import Board from '../../components/board/Board'
 import {
   initialStateDraugths,
   reducerDraugths
 } from '../../states/draugths/draughtsReducer'
 import selectPieceDraughts from '../../states/draugths/selectPieceDraughts'
 import { movePieceDraughts } from '../../states/draugths/movePieceDraughts'
-import Reset from '../../components/butonReset/reset'
+
+import Board from '../../components/board/board'
+import Reset from '../../components/butonReset/Reset'
 
 const Draughts = () => {
   const [Draughts, dispatchDraughts] = useReducer(
